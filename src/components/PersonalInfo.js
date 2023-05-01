@@ -14,19 +14,18 @@ class PersonalInfo extends Component{
                 <ul>
 
                 <li>
-                    <label htmlFor='name' id= 'email'> <span className='form-label'>Name</span>
-                    <input type='text'></input> </label>
+                    <label htmlFor='name' > <span className='form-label'>Name</span>
+                    <input type='text' name='name'></input> </label>
 
                 </li>
                 <li>
                     <label htmlFor='email'> <span className='form-label'>Email</span>
-                    <input type='email' id = 'email'></input> </label>
+                    <input type='email' id = 'email'name='email '></input> </label>
 
                 </li>
                     <li>
                     <label htmlFor='phone'> <span className='form-label'>Phone Number</span>
-                    <input type='tel'id = 'phone'></input> </label>
-
+                    <input type='tel'id = 'phone'name = 'phone'></input> </label>
                     </li>
 
            </ul>
