@@ -11,6 +11,7 @@ constructor(props){
         currPosition:null,
         currFromDate:null,
         currToDate:null,
+        index:0,
         modules:[]
         
 
@@ -38,18 +39,22 @@ handleChange(e,idx){
 }
 appendModule(e){
     e.preventDefault();
+    this.setState({index:this.state.index+1})
     this.setState({
+        
         modules:this.state.modules.concat({
             name:this.state.currName,
             position:this.state.currPosition,
             datefrom:this.state.currFromDate,
-            dateto:this.state.currToDate
+            dateto:this.state.currToDate,
+            index:this.state.index
         })
     })
     this.setState({
         currName:null,
-        currStudy:null,
-        currStudyDate:null
+        currPosition:null,
+        currFromDate:null,
+        currToDate:null,
     })
     console.log(this.state.modules);
     
@@ -58,11 +63,22 @@ appendModule(e){
 render() {
     return (
         <>
+         {this.state.modules.length>0? this.state.modules.map(item=>{
+            return(
+                <div className='work-module' id = {'work-module'+ item.index}key={'work-module'+item.index}>
+                    <p>{item.name}</p>
+                    <p>{item.position}</p>
+                    <p>{item.datefrom}</p>
+                    <p>{item.dateto}</p>
+                </div>
+            )
+        }):0}
         {this.state.expModules>0? this.displayForm(this.state.expModules):<></>}
         <button id='add-exp' onClick={(e)=>{
             e.preventDefault();
             this.setState({
-                expModules:this.state.expModules+1
+                expModules:this.state.expModules+1,
+                
             });
             console.log(this.state.expModules);
         }}>Add</button>
@@ -71,6 +87,8 @@ render() {
 }
 displayForm(){
     return(
+        <>
+       
         <fieldset>
             <legend>Work Experience</legend>
         <ul>
@@ -101,6 +119,7 @@ displayForm(){
         <button id='append-work-experience'onClick={this.appendModule}>Append to CV</button>
 
         </fieldset>
+        </>
 
     )
 }
