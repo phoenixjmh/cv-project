@@ -43,7 +43,7 @@ appendModule(e){
     this.setState({
         
         modules:this.state.modules.concat({
-            name:this.state.currName,
+            companyName:this.state.currName,
             position:this.state.currPosition,
             datefrom:this.state.currFromDate,
             dateto:this.state.currToDate,
@@ -60,16 +60,54 @@ appendModule(e){
     
 }
 
+displayForm(){
+    return(
+        
+        <fieldset key="Formb">
+            <legend>Work Experience</legend>
+                <div className='row'>
+                <label htmlFor = "company-name"><span>Company name</span>
+                <input type = 'text' id = 'company-name' 
+                onChange={this.handleChange} ></input>
+                </label>
+
+                </div>
+                <div className='row'>
+            <label htmlFor = "position"><span>Position Title</span>
+                <input type = 'text' id = 'position' 
+                onChange={this.handleChange} ></input>
+                </label>
+
+                </div>
+                <div className='row'>
+
+            <label htmlFor = "date-from"><span>Time worked</span>
+                <input type = 'date' id = 'date-from'
+                onChange={this.handleChange}></input> 
+                <input type ='date' id = 'date-to' onChange={this.handleChange}></input>
+                </label>
+                </div>
+
+        <button id='append-work-experience'onClick={this.appendModule}>Append to CV</button>
+
+        </fieldset>
+
+)
+}
 render() {
     return (
         <>
          {this.state.modules.length>0? this.state.modules.map(item=>{
             return(
-                <div className='work-module' id = {'work-module'+ item.index}key={'work-module'+item.index}>
-                    <p>{item.name}</p>
-                    <p>{item.position}</p>
-                    <p>{item.datefrom}</p>
-                    <p>{item.dateto}</p>
+               <div key={item.index}> 
+               <input type = 'hidden' value ={JSON.stringify(item)} name = {'work-module'+item.index} key = {'work-module'+item.index} readOnly></input>
+               
+                <div className='work-module' id = {'work-div'+ item.index}key={'work-div'+item.index}>
+                    <p key={item.index+'companyName'}>{item.companyName}</p>
+                    <p key={item.index+'position'}>{item.position}</p>
+                    <p key={item.index+'date-from'}>{item.datefrom}</p>
+                    <p key={item.index+'date-to'}>{item.dateto}</p>
+                </div>
                 </div>
             )
         }):0}
@@ -83,44 +121,6 @@ render() {
             console.log(this.state.expModules);
         }}>Add</button>
         </>
-    )
-}
-displayForm(){
-    return(
-        <>
-       
-        <fieldset>
-            <legend>Work Experience</legend>
-        <ul>
-
-            <li>
-                <label htmlFor = "company-name"><span>Company name</span>
-                <input type = 'text' id = 'company-name' name='company' 
-                onChange={this.handleChange} required ></input>
-                </label>
-            </li>
-            <li>
-            <label htmlFor = "position"><span>Position Title</span>
-                <input type = 'text' id = 'position' name='position'
-                onChange={this.handleChange} required ></input>
-                </label>
-            </li>
-
-            <li>
-            <label htmlFor = "date-from"><span>Time worked</span>
-                <input type = 'date' id = 'date-from' name= 'from-date'
-                onChange={this.handleChange}required ></input> required 
-                <input type ='date' id = 'date-to' name='to-date'
-                onChange={this.handleChange}></input>
-                </label>
-
-            </li>
-        </ul>
-        <button id='append-work-experience'onClick={this.appendModule}>Append to CV</button>
-
-        </fieldset>
-        </>
-
     )
 }
 }

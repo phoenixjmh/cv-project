@@ -9,7 +9,8 @@ class App extends Component {
  constructor(){
   super()
   this.state={
-    isPreview:false
+    isPreview:false,
+    cvApp:null
   }
 // this.submitForPreview=this.submitForPreview.bind(this);
 this.handleSubmit=this.handleSubmit.bind(this);
@@ -22,19 +23,20 @@ let formData = new FormData(form);
 
 let dataJSON = Object.fromEntries(formData);
 console.log(dataJSON);
+this.setState({
+  cvApp:dataJSON,
+  isPreview:true
+})
 
 }
-// submitForPreview(){
 
-// this.setState({isPreview:true})
-// }
 render(){
 
     return (
       <form onSubmit={this.handleSubmit}>
-        <Navbar callback1={()=>this.setState({isPreview:false})} callback2={this.submitForPreview}/>
+        <Navbar callback1={()=>this.setState({isPreview:false})} callback2={()=>this.handleSubmit}/>
         {console.log(this.state.isPreview)}
-        {this.state.isPreview===false? <EditPane/>:<PreviewPane/> }
+        {this.state.isPreview===false? <EditPane/>:<PreviewPane cv= {this.state.cvApp}/> }
 
       </form>
     );
@@ -60,8 +62,16 @@ class EditPane extends Component{
   
 }
 class PreviewPane extends Component{
+  constructor(props){
+    super(props)
+  }
+
 render(){
-  return <>Damn preview time</>
+  const cv=this.props.cv;
+  return (<>
+      {cv.name}
+    </>
+    )
 }
 
 }
