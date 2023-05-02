@@ -15,17 +15,17 @@ class PersonalInfo extends Component{
 
                 <li>
                     <label htmlFor='name' > <span className='form-label'>Name</span>
-                    <input type='text' name='name'></input> </label>
+                    <input type='text' name='name' required ></input> </label>
 
                 </li>
                 <li>
                     <label htmlFor='email'> <span className='form-label'>Email</span>
-                    <input type='email' id = 'email'name='email '></input> </label>
+                    <input type='email' id = 'email'name='email ' required ></input> </label>
 
                 </li>
                     <li>
                     <label htmlFor='phone'> <span className='form-label'>Phone Number</span>
-                    <input type='tel'id = 'phone'name = 'phone'></input> </label>
+                    <input type='tel'id = 'phone'name = 'phone' required ></input> </label>
                     </li>
 
            </ul>
