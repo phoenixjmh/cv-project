@@ -12,7 +12,8 @@ constructor(props){
         currFromDate:null,
         currToDate:null,
         index:0,
-        modules:[]
+        modules:[],
+        isAdding:false
         
 
         
