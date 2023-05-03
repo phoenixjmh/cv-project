@@ -32,15 +32,11 @@ handleChange(e,idx){
 
         if(e.target.id==='date-to')
         this.setState({currToDate:e.target.value})
-
-
-    
-    // console.log(this.state);
    
 }
 appendModule(e){
     e.preventDefault();
-    this.setState({index:this.state.index+1})
+    this.setState({index:this.state.index+1,isAdding:false})
     this.setState({
         
         modules:this.state.modules.concat({
@@ -64,8 +60,9 @@ appendModule(e){
 displayForm(){
     return(
         
-        <fieldset key="Formb">
-            <legend>Work Experience</legend>
+        <>
+        {this.state.isAdding ?
+        <>
                 <div className='row'>
                 <label htmlFor = "company-name"><span>Company name</span>
                 <input type = 'text' id = 'company-name' 
@@ -90,38 +87,46 @@ displayForm(){
                 </div>
 
         <button id='append-work-experience'onClick={this.appendModule}>Append to CV</button>
+        </>
+        :null}
 
-        </fieldset>
+        </>
 
 )
 }
 render() {
     return (
-        <>
+        <fieldset>
+            <legend>Work experience</legend>
          {this.state.modules.length>0? this.state.modules.map(item=>{
             return(
                <div key={item.index}> 
-               <input type = 'hidden' value ={JSON.stringify(item)} name = {'work-module'+item.index} key = {'work-module'+item.index} readOnly></input>
+               <input type = 'hidden' value ={JSON.stringify(item)} name = {'workmodule'+item.index} key = {'workmodule'+item.index} readOnly></input>
                
                 <div className='work-module' id = {'work-div'+ item.index}key={'work-div'+item.index}>
                     <p key={item.index+'companyName'}>{item.companyName}</p>
                     <p key={item.index+'position'}>{item.position}</p>
-                    <p key={item.index+'date-from'}>{item.datefrom}</p>
-                    <p key={item.index+'date-to'}>{item.dateto}</p>
+                    <p key={item.index+'datefrom'}>{item.datefrom}</p>
+                    <p key={item.index+'dateto'}>{item.dateto}</p>
                 </div>
                 </div>
             )
-        }):0}
+        }):null}
         {this.state.expModules>0? this.displayForm(this.state.expModules):<></>}
+        <>
+        {!this.state.isAdding?
+        <>
         <button id='add-exp' onClick={(e)=>{
             e.preventDefault();
             this.setState({
                 expModules:this.state.expModules+1,
+                isAdding:true
                 
             });
             console.log(this.state.expModules);
         }}>Add</button>
-        </>
+        </>:null}</>
+        </fieldset>
     )
 }
 }
