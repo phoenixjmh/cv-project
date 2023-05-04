@@ -3,6 +3,7 @@ import PersonalInfo from "./components/PersonalInfo";
 import Education from "./components/Education";
 import Experience from "./components/Experience";
 import PreviewPane from "./components/PreviewPane";
+import  './styles/App.scss'
 
 class App extends Component {
   constructor() {
@@ -26,17 +27,22 @@ class App extends Component {
     });
   }
 
-  
-
   render() {
     return (
+      <>
       <form onSubmit={this.handleSubmit}>
-        <button type='submit' onClick={() => this.handleSubmit}>Preview</button>
         <EditPane />
-        {this.state.isPreview ? <PreviewPane cv={this.state.cvApp}
-          callback={this.retrieveForm} /> : null}
-
-      </form>
+        <button type="submit" onClick={() => this.handleSubmit}>
+          Preview
+        </button>
+        </form>
+        {this.state.isPreview ? (
+          <PreviewPane
+            cv={this.state.cvApp}
+            callback={() => this.setState({ isPreview: false })}
+          />
+        ) : null}
+        </>
     );
   }
 }

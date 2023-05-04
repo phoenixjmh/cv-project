@@ -7,10 +7,10 @@ class PreviewPane extends Component {
   render() {
     const cv = this.props.cv;
     return (
-      <>
+      <div className='preview-panel'>
         <Header obj={cv} callback={this.props.callback} />
         <Main obj={cv} />
-      </>
+      </div>
     );
   }
 }
@@ -56,6 +56,8 @@ const WorkExperience = (props) => {
               className="work-position">{item.position}</p>
             <p key={item.companyName + item.index}
               className="work-name">{item.companyName}</p>
+            <p key={item.description + item.index}
+              className="work-name">{item.description}</p>
 
           </div>
         )
