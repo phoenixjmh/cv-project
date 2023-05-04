@@ -143,11 +143,11 @@ class Experience extends Component {
                     id={"work-div" + item.index}
                     key={"work-div" + item.index}
                   >
-                    <p key={item.index + "companyName"}>{item.companyName}</p>
-                    <p key={item.index + "position"}>{item.position}</p>
-                    <p key={item.index + "description"}>{item.description}</p>
-                    <p key={item.index + "datefrom"}>{item.datefrom}</p>
-                    <p key={item.index + "dateto"}>{item.dateto}</p>
+                    <p key={item.index + "companyName"}><span className="module-label">Company:</span>{item.companyName}</p>
+                    <p key={item.index + "position"}><span className="module-label">Position:</span>{item.position}</p>
+                    <p key={item.index + "description"}><span className="module-label">Description</span>{item.description}</p>
+                    <p key={item.index + "datefrom"}><span className="module-label">Start:</span>{item.datefrom}</p>
+                    <p key={item.index + "dateto"}><span className="module-label">End:</span>{item.dateto}</p>
                   </div>
                 </div>
               );
