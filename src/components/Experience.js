@@ -129,7 +129,7 @@ class Experience extends Component {
         {this.state.modules.length > 0
           ? this.state.modules.map((item) => {
               return (
-                <div key={item.index}>
+                <div className = 'module-container' key={item.index}>
                   <input
                     type="hidden"
                     value={JSON.stringify(item)}
@@ -145,7 +145,7 @@ class Experience extends Component {
                   >
                     <p key={item.index + "companyName"}><span className="module-label">Company:</span>{item.companyName}</p>
                     <p key={item.index + "position"}><span className="module-label">Position:</span>{item.position}</p>
-                    <p key={item.index + "description"}><span className="module-label">Description</span>{item.description}</p>
+                    <p key={item.index + "description"}><span className="module-label">Description</span>{item.description.slice(0,15)+'...'}</p>
                     <p key={item.index + "datefrom"}><span className="module-label">Start:</span>{item.datefrom}</p>
                     <p key={item.index + "dateto"}><span className="module-label">End:</span>{item.dateto}</p>
                   </div>

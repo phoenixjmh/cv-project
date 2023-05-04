@@ -6,6 +6,7 @@ class PreviewPane extends Component {
 
   render() {
     const cv = this.props.cv;
+    console.log(cv);
     return (
       <div className='preview-panel'>
         <Header obj={cv} callback={this.props.callback} />
@@ -70,7 +71,6 @@ const EducationExperience = (props) => {
   const cv = props.obj;
   let eduModules = parseModules(cv, "educationmodule");
 
-  console.log(eduModules);
   return (
     <section id='education-history'>
       {eduModules.map(item => {

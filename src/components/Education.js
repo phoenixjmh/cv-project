@@ -105,7 +105,7 @@ class Education extends Component {
         {this.state.modules.length > 0
           ? this.state.modules.map((item) => {
               return (
-                <div key={item.index}>
+                <div className = 'module-container' key={item.index}>
                   <input
                     type="hidden"
                     value={JSON.stringify(item)}
@@ -114,13 +114,13 @@ class Education extends Component {
                     readOnly
                   ></input>
                   <div
-                    className="education-module"
+                    className="edu-module"
                     id={"edu-div" + item.index}
                     key={"edu-div" + item.index}
                   >
-                    <p key={item.index + "school-name"}>{item.schoolName}</p>
-                    <p key={"study" + item.index}>{item.study}</p>
-                    <p key={"date" + item.index}>{item.studyDate}</p>
+                    <p key={item.index + "school-name"}><span className = 'module-label'>School:</span> {item.schoolName}</p>
+                    <p key={"study" + item.index}><span className = 'module-label'>Area of Study</span> {item.study}</p>
+                    <p key={"date" + item.index}><span className = 'module-label'>Date</span> {item.dateStudied}</p>
                   </div>
                 </div>
               );
