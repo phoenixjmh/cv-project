@@ -8,9 +8,13 @@ class PreviewPane extends Component {
     const cv = this.props.cv;
     console.log(cv);
     return (
-      <div className='preview-panel'>
+      <div className='preview-page'>
+<button onClick={this.props.callback}>Edit</button>
+<div className='preview-panel'>
+
         <Header obj={cv} callback={this.props.callback} />
         <Main obj={cv} />
+</div>
       </div>
     );
   }
@@ -20,11 +24,13 @@ const Header = (props) => {
   const cv = props.obj;
   return (
     <>
-      <button onClick={props.callback}>Edit</button>
       <header>
         <h2>{cv.name}</h2>
+        <div className="contact-info">
+          <span>Contact Info</span>
         <aside>{cv.email}</aside>
         <aside>{cv.phone}</aside>
+        </div>
       </header>
     </>
   );
@@ -47,18 +53,19 @@ const WorkExperience = (props) => {
 
   return (
     <section id='work-experience'>
+      <span className='cv-section-label'>Work Experience</span>
       {workModules.map(item => {
         return (
           <div key={'work-module' + item.index}
             className='work-module'>
+            <p key={item.position + item.index}
+              className="work-position">{capitalizeTitle(item.position)}</p>
+            <p key={item.companyName + item.index}
+              className="work-name">{capitalizeTitle(item.companyName)}</p>
             <p key={item.index + item.datefrom}
               className='work-dates'>{item.datefrom + ' to ' + item.dateto}</p>
-            <p key={item.position + item.index}
-              className="work-position">{item.position}</p>
-            <p key={item.companyName + item.index}
-              className="work-name">{item.companyName}</p>
             <p key={item.description + item.index}
-              className="work-name">{item.description}</p>
+              className="work-description">{item.description}</p>
 
           </div>
         )
@@ -98,6 +105,16 @@ function parseModules(object, string) {
   });
 
   return modules;
+}
+
+function capitalizeTitle(string){
+  let capitalized=string.replace(string[0],string[0].toUpperCase())
+  for(let i=0;i<capitalized.length;i++){
+      if(capitalized[i]===' '&& i<capitalized.length-1){
+          capitalized=capitalized.replace((capitalized[i]+capitalized[i+1]),(capitalized[i]+capitalized[i+1]).toUpperCase())
+      }   
+  }
+  return capitalized;
 }
 export default PreviewPane;
 

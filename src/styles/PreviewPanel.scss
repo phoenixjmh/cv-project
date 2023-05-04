@@ -1,0 +1,78 @@
+@import './App.scss';
+
+$primary:black;
+$secondary:orange;
+.preview-page{
+    position:absolute;
+    top:0;
+    background-color: gray;
+    width:100%;
+    height:100%;
+
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.preview-panel{
+    padding:5rem;
+    width:70%;
+    background-color: white;
+}
+
+header{
+    border:2px solid black;
+    h2{
+        font-size:3rem;
+    }
+    .contact-info{
+        span{
+            font-size:1.5rem;
+            text-decoration: underline;
+            font-style:normal;
+        }
+        aside{
+
+            padding-right:1rem;
+        }
+        padding-right:1rem;
+        text-align: end;
+        color:$secondary;
+        font-style:italic;
+
+    }
+}
+
+main{
+    display:flex;
+    justify-content: space-evenly;
+    
+    .cv-section-label{
+        text-align: center;
+        border-bottom:1px solid $primary;
+        font-size:2rem;
+        font-weight:500;
+    }
+
+    section{
+        border:2px solid black;
+        padding:1rem;
+        display:flex;
+        flex-direction: column;
+        gap:2rem;
+    }
+    .work-module{
+        .work-dates{
+
+        }
+        .work-position{
+
+        }
+        .work-name{
+
+        }
+        .work-description{
+
+        }
+    }
+}
