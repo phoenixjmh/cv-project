@@ -5,6 +5,7 @@ class Experience extends Component {
     this.displayForm = this.displayForm.bind(this);
     this.appendModule = this.appendModule.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.editForm=this.editForm.bind(this);
     this.state = {
       expModules: 0,
       currName: null,
@@ -15,6 +16,7 @@ class Experience extends Component {
       index: 0,
       modules: [],
       isAdding: false,
+      isEditing:false,
     };
   }
   handleChange(e, idx) {
@@ -56,6 +58,81 @@ class Experience extends Component {
     console.log(this.state.modules);
   }
 
+  editForm(e,moduleVals){
+    e.preventDefault();
+    console.log( moduleVals,'Module Vals');
+    const name=moduleVals.companyName;
+    const position=moduleVals.position;
+    const datefrom=moduleVals.datefrom;
+    const dateto=moduleVals.dateto;
+    const description=moduleVals.description;
+
+    this.setState({isEditing:true});
+  //   <div className="modular-form-section">
+  //   {this.state.isEditing ? (
+  //     <>
+  //       <div className="row">
+  //         <label htmlFor="company-name">
+  //           <span>Company name</span>
+  //           <input
+  //             type="text"
+  //             id="company-name"
+  //             onChange={this.handleChange}
+  //             // value={}
+  //           ></input>
+  //         </label>
+  //       </div>
+  //       <div className="row">
+  //         <label htmlFor="position">
+  //           <span>Position Title</span>
+  //           <input
+  //             type="text"
+  //             id="position"
+  //             onChange={this.handleChange}
+  //           ></input>
+  //         </label>
+  //       </div>
+
+  //       <div className="row">
+  //         <label htmlFor="job-description">
+  //           <span>Job Description</span>
+  //           <input
+  //             type="textarea"
+  //             id="job-description"
+  //             onChange={this.handleChange}
+  //           ></input>
+  //         </label>
+  //       </div>
+
+  //       <div className="row">
+  //         <label htmlFor="date-from">
+  //           <span>Start Date:</span>
+  //           <input
+  //             type="date"
+  //             id="date-from"
+  //             onChange={this.handleChange}
+  //           ></input>
+  //         </label>
+  //         <label htmlFor="date-to">
+  //           <span>End Date:</span>
+  //           <input
+  //             type="date"
+  //             id="date-to"
+  //             onChange={this.handleChange}
+  //           ></input>
+  //         </label>
+  //       </div>
+
+  //       <button id="append-work-experience" onClick={this.appendModule}>
+  //         Save
+  //       </button>
+  //     </>
+  //   ) : null}
+  // </div>
+
+
+  }
+
   displayForm() {
     return (
       <div className="modular-form-section">
@@ -94,23 +171,21 @@ class Experience extends Component {
             </div>
 
             <div className="row">
-             
-              <label htmlFor ="date-from">
-              <span>Start Date:</span>
-              <input
-                type="date"
-                id="date-from"
-                onChange={this.handleChange}
-              ></input>
+              <label htmlFor="date-from">
+                <span>Start Date:</span>
+                <input
+                  type="date"
+                  id="date-from"
+                  onChange={this.handleChange}
+                ></input>
               </label>
-              <label htmlFor= "date-to">
-              <span>End Date:</span>
-              <input
-                type="date"
-                id="date-to"
-                onChange={this.handleChange}
-              ></input>
-
+              <label htmlFor="date-to">
+                <span>End Date:</span>
+                <input
+                  type="date"
+                  id="date-to"
+                  onChange={this.handleChange}
+                ></input>
               </label>
             </div>
 
@@ -129,7 +204,7 @@ class Experience extends Component {
         {this.state.modules.length > 0
           ? this.state.modules.map((item) => {
               return (
-                <div className = 'module-container' key={item.index}>
+                <div className="module-container" key={item.index}>
                   <input
                     type="hidden"
                     value={JSON.stringify(item)}
@@ -137,17 +212,33 @@ class Experience extends Component {
                     key={"workmodule" + item.index}
                     readOnly
                   ></input>
+                  <button onClick={(event)=>this.editForm(event,item)}>Edit</button>
 
                   <div
                     className="work-module"
                     id={"work-div" + item.index}
                     key={"work-div" + item.index}
                   >
-                    <p key={item.index + "companyName"}><span className="module-label">Company:</span>{item.companyName}</p>
-                    <p key={item.index + "position"}><span className="module-label">Position:</span>{item.position}</p>
-                    <p key={item.index + "description"}><span className="module-label">Description</span>{item.description.slice(0,15)+'...'}</p>
-                    <p key={item.index + "datefrom"}><span className="module-label">Start:</span>{item.datefrom}</p>
-                    <p key={item.index + "dateto"}><span className="module-label">End:</span>{item.dateto}</p>
+                    <p key={item.index + "companyName"}>
+                      <span className="module-label">Company:</span>
+                      {item.companyName}
+                    </p>
+                    <p key={item.index + "position"}>
+                      <span className="module-label">Position:</span>
+                      {item.position}
+                    </p>
+                    <p key={item.index + "description"}>
+                      <span className="module-label">Description</span>
+                      {item.description.slice(0, 15) + "..."}
+                    </p>
+                    <p key={item.index + "datefrom"}>
+                      <span className="module-label">Start:</span>
+                      {item.datefrom}
+                    </p>
+                    <p key={item.index + "dateto"}>
+                      <span className="module-label">End:</span>
+                      {item.dateto}
+                    </p>
                   </div>
                 </div>
               );

@@ -29,7 +29,7 @@ class App extends Component {
   }
 
   render() {
-    const DEBUG_OBJ = { name: "Phoenix Hollingsworth", email: "phoenixj@j.j", phone: "8058361651", workmodule0: '{"companyName":"big ass walmart","position":"the best cashier","datefrom":"2020-02-02","dateto":"2020-02-02","description":"fasdfasdfasdfasdf","index":0}', workmodule1: `{"companyName":"ranch house","position":"ass company","datefrom":"2020-02-02","dateto":"2020-02-02","description":"BIggest effing weiner you've ever even seen","index":1}`, educationmodule0: '{"schoolName":"Vista Ridge High School","study":"Boobs mostly","dateStudied":"2011-02-02","index":0}' }
+    // const DEBUG_OBJ = { name: "Phoenix Hollingsworth", email: "phoenixj@j.j", phone: "8058361651", workmodule0: '{"companyName":"big ass walmart","position":"the best cashier","datefrom":"02/1999","dateto":"02/2020","description":"fasdfasdfasdfasdf","index":0}', workmodule1: `{"companyName":"ranch house","position":"ass company","datefrom":"2020-02-02","dateto":"2020-02-02","description":"BIggest effing weiner you've ever even seen","index":1}`, educationmodule0: '{"schoolName":"Vista Ridge High School","study":"Boobs mostly","dateStudied":"2011-02-02","index":0}' }
     return (
       <>
       <form onSubmit={this.handleSubmit}>
@@ -40,10 +40,10 @@ class App extends Component {
         </form>
         {this.state.isPreview ? (
           <PreviewPane
-          cv = {DEBUG_OBJ}     //DEBUG
+          // cv = {DEBUG_OBJ}     //DEBUG
 
 
-            // cv={this.state.cvApp}     //UNCOMMENT FOR BUILD
+            cv={this.state.cvApp}     //UNCOMMENT FOR BUILD
 
             
             callback={() => this.setState({ isPreview: false })}
