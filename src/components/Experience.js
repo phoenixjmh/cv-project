@@ -1,7 +1,9 @@
 import React, { Component } from "react";
+import {useRef} from 'react';
 class Experience extends Component {
   constructor(props) {
     super(props);
+    
     this.displayForm = this.displayForm.bind(this);
     this.appendModule = this.appendModule.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -58,77 +60,17 @@ class Experience extends Component {
     console.log(this.state.modules);
   }
 
-  editForm(e,moduleVals){
+  editForm(e){
     e.preventDefault();
-    console.log( moduleVals,'Module Vals');
-    const name=moduleVals.companyName;
-    const position=moduleVals.position;
-    const datefrom=moduleVals.datefrom;
-    const dateto=moduleVals.dateto;
-    const description=moduleVals.description;
+    // console.log( moduleVals,'Module Vals');
+    // const name=moduleVals.companyName;
+    // const position=moduleVals.position;
+    // const datefrom=moduleVals.datefrom;
+    // const dateto=moduleVals.dateto;
+    // const description=moduleVals.description;
 
     this.setState({isEditing:true});
-  //   <div className="modular-form-section">
-  //   {this.state.isEditing ? (
-  //     <>
-  //       <div className="row">
-  //         <label htmlFor="company-name">
-  //           <span>Company name</span>
-  //           <input
-  //             type="text"
-  //             id="company-name"
-  //             onChange={this.handleChange}
-  //             // value={}
-  //           ></input>
-  //         </label>
-  //       </div>
-  //       <div className="row">
-  //         <label htmlFor="position">
-  //           <span>Position Title</span>
-  //           <input
-  //             type="text"
-  //             id="position"
-  //             onChange={this.handleChange}
-  //           ></input>
-  //         </label>
-  //       </div>
-
-  //       <div className="row">
-  //         <label htmlFor="job-description">
-  //           <span>Job Description</span>
-  //           <input
-  //             type="textarea"
-  //             id="job-description"
-  //             onChange={this.handleChange}
-  //           ></input>
-  //         </label>
-  //       </div>
-
-  //       <div className="row">
-  //         <label htmlFor="date-from">
-  //           <span>Start Date:</span>
-  //           <input
-  //             type="date"
-  //             id="date-from"
-  //             onChange={this.handleChange}
-  //           ></input>
-  //         </label>
-  //         <label htmlFor="date-to">
-  //           <span>End Date:</span>
-  //           <input
-  //             type="date"
-  //             id="date-to"
-  //             onChange={this.handleChange}
-  //           ></input>
-  //         </label>
-  //       </div>
-
-  //       <button id="append-work-experience" onClick={this.appendModule}>
-  //         Save
-  //       </button>
-  //     </>
-  //   ) : null}
-  // </div>
+  //
 
 
   }
@@ -210,9 +152,9 @@ class Experience extends Component {
                     value={JSON.stringify(item)}
                     name={"workmodule" + item.index}
                     key={"workmodule" + item.index}
-                    readOnly
                   ></input>
-                  <button onClick={(event)=>this.editForm(event,item)}>Edit</button>
+                  <button onClick={(event)=>this.editForm(event)}>Edit</button>
+                  {!this.state.isEditing?
 
                   <div
                     className="work-module"
@@ -240,6 +182,7 @@ class Experience extends Component {
                       {item.dateto}
                     </p>
                   </div>
+                :<EditForm values={item} isEditing={this.state.isEditing} />}
                 </div>
               );
             })
@@ -272,5 +215,91 @@ class Experience extends Component {
       </div>
     );
   }
+}
+
+class EditForm extends Component{
+  //Make a form that deploys on the target of the edit button.
+  constructor(props){
+    super(props)
+    this.handleChange=this.handleChange.bind(this);
+  }
+
+  
+  handleChange(e){
+    //Let new values effect the parent element's item..Which is technically the hidden input with the hidden JSON data
+   
+  }
+  render(){
+
+    let isEditing=this.props.isEditing;
+    let moduleValues=this.props.values;
+    return(
+    <div className="modular-form-section">
+    {isEditing ? (
+      <>
+        <div className="row">
+          <label htmlFor="company-name">
+            <span>Company name</span>
+            <input
+              type="text"
+              id="company-name"
+              onChange={this.handleChange}
+              value={moduleValues.companyName}
+              ></input>
+          </label>
+        </div>
+        <div className="row">
+          <label htmlFor="position">
+            <span>Position Title</span>
+            <input
+              type="text"
+              id="position"
+              onChange={this.handleChange}
+              value={moduleValues.position}
+              ></input>
+          </label>
+        </div>
+
+        <div className="row">
+          <label htmlFor="job-description">
+            <span>Job Description</span>
+            <input
+              type="textarea"
+              id="job-description"
+              onChange={this.handleChange}
+              value={moduleValues.description}
+              ></input>
+          </label>
+        </div>
+
+        <div className="row">
+          <label htmlFor="date-from">
+            <span>Start Date:</span>
+            <input
+              type="date"
+              id="date-from"
+              onChange={this.handleChange}
+              value={moduleValues.datefrom?moduleValues.datefrom:'suh'}
+              ></input>
+          </label>
+          <label htmlFor="date-to">
+            <span>End Date:</span>
+            <input
+              type="date"
+              id="date-to"
+              onChange={this.handleChange}
+              value={moduleValues.dateto? moduleValues.dateto:'suh'}
+              ></input>
+          </label>
+        </div>
+
+        <button id="append-work-experience" onClick={console.log('Ayo')}>
+          Save
+        </button>
+      </>
+    ) : null}
+  </div>
+  )
+}
 }
 export default Experience;
