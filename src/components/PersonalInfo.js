@@ -14,7 +14,7 @@ class PersonalInfo extends Component {
             <label htmlFor="name">
               {" "}
               <span className="form-label">Name</span>
-              <input type="text" name="name" ></input>{" "}
+              <input type="text" name="name" required ></input>{" "}
             </label>
           </div>
 
@@ -22,13 +22,13 @@ class PersonalInfo extends Component {
             <label htmlFor="email">
               {" "}
               <span className="form-label">Email</span>
-              <input type="email" id="email" name="email" ></input>{" "}
+              <input type="email" id="email" name="email" required ></input>{" "}
             </label>
           
             <label htmlFor="phone">
               {" "}
               <span className="form-label">Phone Number</span>
-              <input type="tel" id="phone" name="phone" ></input>{" "}
+              <input type="tel" id="phone" name="phone" required ></input>{" "}
             </label>
           </div>
       </div>

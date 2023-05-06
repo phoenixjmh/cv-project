@@ -32,21 +32,25 @@ class Education extends Component {
 
   appendModule(e) {
     e.preventDefault();
+    if(this.state.currName &&this.state.currStudy&&this.state.currStudyDate){
+      this.setState({ index: this.state.index + 1, isAdding: false });
+      this.setState({
+        modules: this.state.modules.concat({
+          schoolName: this.state.currName,
+          study: this.state.currStudy,
+          dateStudied: this.state.currStudyDate,
+          index: this.state.index,
+        }),
+      });
+      this.setState({
+        currName: null,
+        currStudy: null,
+        currStudyDate: null,
+      });
 
-    this.setState({ index: this.state.index + 1, isAdding: false });
-    this.setState({
-      modules: this.state.modules.concat({
-        schoolName: this.state.currName,
-        study: this.state.currStudy,
-        dateStudied: this.state.currStudyDate,
-        index: this.state.index,
-      }),
-    });
-    this.setState({
-      currName: null,
-      currStudy: null,
-      currStudyDate: null,
-    });
+    }
+    this.setState({isAdding:false})
+ 
     console.log(this.state.index);
   }
 
@@ -116,12 +120,18 @@ class Education extends Component {
                   <div
                     className="edu-module"
                     id={"edu-div" + item.index}
-                    key={"edu-div" + item.index}
+                    key={"edu-div" + item.ifndex}
                   >
                     <p key={item.index + "school-name"}><span className = 'module-label'>School:</span> {item.schoolName}</p>
                     <p key={"study" + item.index}><span className = 'module-label'>Area of Study</span> {item.study}</p>
                     <p key={"date" + item.index}><span className = 'module-label'>Date</span> {item.dateStudied}</p>
                   </div>
+                  <button className='delete-button' onClick={(e)=>{
+                    e.preventDefault();
+                    this.setState({modules:this.state.modules.filter(currItem=>currItem!=item)})
+                    
+                   
+                  }}>Delete</button>
                 </div>
               );
             })

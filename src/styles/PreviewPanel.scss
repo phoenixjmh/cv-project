@@ -6,7 +6,7 @@ $secondary:rgb(46, 15, 15);
     color:$primary;
     position:absolute;
     top:0;
-    background-color: gray;
+    background-color: $accent;
     width:100%;
     height:100%;
     
@@ -53,6 +53,7 @@ header{
     }
 }
 
+
 main{
 
     display:grid;
@@ -86,6 +87,7 @@ main{
 
     }
     
+    
 
     .cv-section-label{
     font-family:'Pathway Extreme',sans-serif;
@@ -116,7 +118,7 @@ main{
        align-items: center;
        grid-template-columns: 2fr 3fr;
     //    gap:1rem;
-        
+   
         .work-dates{
             grid-column:1;
             font-size:.8rem;
@@ -159,4 +161,5 @@ main{
             font-size:.8rem;
         }
     }
+   
 }
