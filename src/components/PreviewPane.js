@@ -1,15 +1,13 @@
 import React, { Component } from "react";
 class PreviewPane extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     const cv = this.props.cv;
-    console.log(cv);
     return (
       <div className="preview-page">
-        <button onClick={this.props.callback}>Edit</button>
+        <button id="edit-button" onClick={this.props.callback}>
+          {" "}
+          {"<  Return to Edit"}
+        </button>
         <div className="preview-panel">
           <Header obj={cv} callback={this.props.callback} />
           <Main obj={cv} />
@@ -54,7 +52,6 @@ const Main = (props) => {
 const WorkExperience = (props) => {
   const cv = props.obj;
   let workModules = parseModules(cv, "workmodule");
-  console.log(workModules);
 
   return (
     <section id="work-experience">
@@ -128,6 +125,7 @@ function capitalizeTitle(string) {
   return capitalized;
 }
 
-const formatDate = (date) =>date? date.split("-").reverse().join("/").slice(3):'present';
+const formatDate = (date) =>
+  date ? date.split("-").reverse().join("/").slice(3) : "present";
 
 export default PreviewPane;

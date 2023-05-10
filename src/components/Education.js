@@ -27,12 +27,15 @@ class Education extends Component {
     if (e.target.id === "date-of-study")
       this.setState({ currStudyDate: e.target.value });
 
-    // console.log(this.state);
   }
 
   appendModule(e) {
     e.preventDefault();
-    if(this.state.currName &&this.state.currStudy&&this.state.currStudyDate){
+    if (
+      this.state.currName &&
+      this.state.currStudy &&
+      this.state.currStudyDate
+    ) {
       this.setState({ index: this.state.index + 1, isAdding: false });
       this.setState({
         modules: this.state.modules.concat({
@@ -47,18 +50,16 @@ class Education extends Component {
         currStudy: null,
         currStudyDate: null,
       });
-
     }
-    this.setState({isAdding:false})
- 
-    console.log(this.state.index);
+    this.setState({ isAdding: false });
+
   }
 
   displayForm(idx) {
     return (
-      <div className="modular-form-section">
+      <>
         {this.state.isAdding ? (
-          <>
+          <div className="modular-form-section">
             <div className="row">
               <label htmlFor="school-name">
                 <span>School Name</span>
@@ -66,6 +67,7 @@ class Education extends Component {
                   type="text"
                   id="school-name"
                   onChange={(event) => this.handleChange(event, idx)}
+                  required
                 ></input>
               </label>
             </div>
@@ -76,6 +78,7 @@ class Education extends Component {
                   type="text"
                   id="area-of-study"
                   onChange={(event) => this.handleChange(event, idx)}
+                  required
                 ></input>
               </label>
             </div>
@@ -87,6 +90,7 @@ class Education extends Component {
                   type="date"
                   id="date-of-study"
                   onChange={(event) => this.handleChange(event, idx)}
+                  required
                 ></input>
               </label>
             </div>
@@ -97,19 +101,19 @@ class Education extends Component {
             >
               Save
             </button>
-          </>
+          </div>
         ) : null}
-      </div>
+      </>
     );
   }
   render() {
     return (
       <div className="eduForm form-section">
-        <h3 className='form-label'>Education</h3>
+        <h3 className="form-label">Education</h3>
         {this.state.modules.length > 0
           ? this.state.modules.map((item) => {
               return (
-                <div className = 'module-container' key={item.index}>
+                <div className="module-container" key={item.index}>
                   <input
                     type="hidden"
                     value={JSON.stringify(item)}
@@ -122,16 +126,32 @@ class Education extends Component {
                     id={"edu-div" + item.index}
                     key={"edu-div" + item.ifndex}
                   >
-                    <p key={item.index + "school-name"}><span className = 'module-label'>School:</span> {item.schoolName}</p>
-                    <p key={"study" + item.index}><span className = 'module-label'>Area of Study</span> {item.study}</p>
-                    <p key={"date" + item.index}><span className = 'module-label'>Date</span> {item.dateStudied}</p>
+                    <p key={item.index + "school-name"}>
+                      <span className="module-label">School:</span>{" "}
+                      {item.schoolName}
+                    </p>
+                    <p key={"study" + item.index}>
+                      <span className="module-label">Area of Study</span>{" "}
+                      {item.study}
+                    </p>
+                    <p key={"date" + item.index}>
+                      <span className="module-label">Date</span>{" "}
+                      {item.dateStudied}
+                    </p>
                   </div>
-                  <button className='delete-button' onClick={(e)=>{
-                    e.preventDefault();
-                    this.setState({modules:this.state.modules.filter(currItem=>currItem!=item)})
-                    
-                   
-                  }}>Delete</button>
+                  <button
+                    className="delete-button"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      this.setState({
+                        modules: this.state.modules.filter(
+                          (currItem) => currItem !== item
+                        ),
+                      });
+                    }}
+                  >
+                    REMOVE
+                  </button>
                 </div>
               );
             })
@@ -153,7 +173,6 @@ class Education extends Component {
                     idx: 0,
                     isAdding: true,
                   });
-                  console.log(this.state.eduModules);
                 }}
               >
                 {" "}

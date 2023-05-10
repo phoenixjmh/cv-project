@@ -3,8 +3,8 @@ import PersonalInfo from "./components/PersonalInfo";
 import Education from "./components/Education";
 import Experience from "./components/Experience";
 import PreviewPane from "./components/PreviewPane";
-import  './styles/App.scss'
-import './styles/PreviewPanel.scss'
+import "./styles/App.scss";
+import "./styles/PreviewPanel.scss";
 
 class App extends Component {
   constructor() {
@@ -14,42 +14,54 @@ class App extends Component {
       cvApp: null,
     };
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleErrors = this.handleErrors.bind(this);
   }
   handleSubmit(e) {
     e.preventDefault();
     let form = e.target;
+    if (this.handleErrors(form)) {
+      let formData = new FormData(form);
 
-    let formData = new FormData(form);
+      let dataJSON = Object.fromEntries(formData);
+      this.setState({
+        cvApp: dataJSON,
+        isPreview: true,
+      });
+    } else {
+      return;
+    }
+  }
+  handleErrors(form) {
+    const expForm = form.childNodes[1].childNodes[1];
+    const eduForm = form.childNodes[2].childNodes[1];
+    if (expForm.className === "modular-form-section") {
+      alert("Please Save Work Experience Module");
+      return false;
+    }
+    if (eduForm.className === "modular-form-section") {
+      alert("Please Save Education Module");
+      return false;
+    }
 
-    let dataJSON = Object.fromEntries(formData);
-    this.setState({
-      cvApp: dataJSON,
-      isPreview: true,
-    });
+    return true;
   }
 
   render() {
-    // const DEBUG_OBJ = { name: "Phoenix Hollingsworth", email: "phoenixj@j.j", phone: "8058361651", workmodule0: '{"companyName":"big ass walmart","position":"the best cashier","datefrom":"02/1999","dateto":"02/2020","description":"fasdfasdfasdfasdf","index":0}', workmodule1: `{"companyName":"ranch house","position":"ass company","datefrom":"2020-02-02","dateto":"2020-02-02","description":"BIggest effing weiner you've ever even seen","index":1}`, educationmodule0: '{"schoolName":"Vista Ridge High School","study":"Boobs mostly","dateStudied":"2011-02-02","index":0}' }
     return (
       <>
-      <form onSubmit={this.handleSubmit}>
-        <EditPane />
-        <button type="submit" onClick={() => this.handleSubmit}>
-          Preview
-        </button>
+        <form onSubmit={this.handleSubmit}>
+          <EditPane />
+          <button type="submit" onClick={() => this.handleSubmit}>
+            Preview
+          </button>
         </form>
         {this.state.isPreview ? (
           <PreviewPane
-          // cv = {DEBUG_OBJ}     //DEBUG
-
-
-            cv={this.state.cvApp}     //UNCOMMENT FOR BUILD
-
-            
+            cv={this.state.cvApp} //UNCOMMENT FOR BUILD
             callback={() => this.setState({ isPreview: false })}
           />
         ) : null}
-        </>
+      </>
     );
   }
 }
@@ -66,7 +78,4 @@ class EditPane extends Component {
   }
 }
 
-
-
-// { name: "Phoenix Hollingsworth", email: "phoenixj@j.j", phone: "8058361651", workmodule0: '{"companyName":"Big Walmart","position":"f","datefrom":null,"dateto":null,"description":"fasdfasdfasdfasdf","index":0}', workmodule1: `{"companyName":"Ranch house","position":"assCompoany","datefrom":"2020-02-02","dateto":"2020-02-02","description":"BIggest effing weiner you've ever even seen","index":1}`, educationmodule0: '{"schoolName":"Vista Ridge High School","study":"Boobs mostly","dateStudied":"2011-02-02","index":0}' }
 export default App;

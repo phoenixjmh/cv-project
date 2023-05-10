@@ -7,7 +7,8 @@
     $form-input-border:rgb(202,202,202);
     $form-label:rgb(76, 76, 76);
     $accent:rgb(206, 204, 204);
-
+    $invalid:rgb(255, 158, 158);
+    $valid:rgb(197, 255, 197);
 
    
 
@@ -50,6 +51,11 @@ form{
         position:relative;
         left:80%;
     }
+    button:hover{
+        box-shadow: 1px 3px 5px black;
+        transition:box-shadow, .2s ease-in-out;
+    }
+
 
     
     h3{
@@ -92,6 +98,14 @@ form{
             }
             input:hover{
                 border:none;
+                box-shadow:1px 1px 3px black;
+                transition: box-shadow, .2s ease-in-out;
+            }
+            input:focus:invalid{
+                background: $invalid;
+            }
+            input:valid{
+                background:$valid;
             }
         }
     }
@@ -123,15 +137,14 @@ form{
         justify-content: space-between;
         .delete-button{
             background:pink;
-            color:rgb(255, 255, 255);
+            color:rgb(91, 91, 91);
             font-family:'Open Sans' sans-serif;
             
             font-size:.8rem;
-            font-weight:500;
+            font-weight:700;
             border:1px solid red;
-            padding:.6rem;
             width:auto;
-            height:10%;
+            height:2rem;
         }
     }
 

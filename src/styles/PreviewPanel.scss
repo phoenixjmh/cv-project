@@ -15,6 +15,18 @@ $secondary:rgb(46, 15, 15);
     align-items: center;
     flex-direction: column;
 }
+#edit-button{
+    background:none;
+    border:none;
+    transition: font-size, .3s ease-in-out;
+    
+    
+}
+#edit-button:hover{
+    font-size:1.5rem;
+    color:$primary;
+    transition: font-size, .3s ease-in-out;
+}
 .preview-panel{
     font-family:'Pathway Extreme',sans-serif;
     display:flex;
@@ -121,9 +133,9 @@ main{
    
         .work-dates{
             grid-column:1;
-            font-size:.8rem;
+            font-size:.6rem;
             text-align: start;
-            font-weight:800;
+            font-weight:900;
         }
         .work-position{
             grid-column:2;
