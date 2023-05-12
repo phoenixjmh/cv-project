@@ -1,26 +1,22 @@
-import React, { Component } from "react";
-class PreviewPane extends Component {
-  render() {
-    const cv = this.props.cv;
+const PreviewPane =(props)=> {
+    const cv = props.cv;
     return (
       <div className="preview-page">
-        <button id="edit-button" onClick={this.props.callback}>
+        <button id="edit-button" onClick={props.callback}>
           {" "}
           {"<  Return to Edit"}
         </button>
         <div className="preview-panel">
-          <Header obj={cv} callback={this.props.callback} />
+          <Header obj={cv} callback={props.callback} />
           <Main obj={cv} />
         </div>
       </div>
     );
   }
-}
 
 const Header = (props) => {
   const cv = props.obj;
   return (
-    <>
       <header>
         <h2>{cv.name.toUpperCase()}</h2>
         <div className="contact-info">
@@ -28,7 +24,6 @@ const Header = (props) => {
           <aside>{cv.email}</aside>
         </div>
       </header>
-    </>
   );
 };
 
@@ -102,7 +97,7 @@ const EducationExperience = (props) => {
   );
 };
 
-function parseModules(object, string) {
+const parseModules=(object, string)=> {
   const objArray = Object.entries(object);
   let modules = [];
   objArray.forEach((item) => {
@@ -112,7 +107,7 @@ function parseModules(object, string) {
   return modules;
 }
 
-function capitalizeTitle(string) {
+const capitalizeTitle=(string)=> {
   let capitalized = string.replace(string[0], string[0].toUpperCase());
   for (let i = 0; i < capitalized.length; i++) {
     if (capitalized[i] === " " && i < capitalized.length - 1) {
