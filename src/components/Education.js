@@ -35,8 +35,7 @@ const Education = () => {
     setIsAdding(false);
   };
 
-  const displayForm = (idx) => {
-    return (
+  const displayForm = (idx) =>(
       <>
         {isAdding ? (
           <div className="modular-form-section">
@@ -83,7 +82,6 @@ const Education = () => {
         ) : null}
       </>
     );
-  };
 
   return (
     <div className="eduForm form-section">
