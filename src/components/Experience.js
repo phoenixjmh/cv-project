@@ -1,77 +1,65 @@
-import React, { Component } from "react";
-class Experience extends Component {
-  constructor(props) {
-    super(props);
+import {useState} from "react";
 
-    this.displayForm = this.displayForm.bind(this);
-    this.appendModule = this.appendModule.bind(this);
-    this.handleChange = this.handleChange.bind(this);
-    this.state = {
-      expModules: 0,
-      currName: null,
-      currPosition: null,
-      currFromDate: null,
-      currToDate: null,
-      currDescription: null,
-      index: 0,
-      modules: [],
-      isAdding: false,
-      isEditing: false,
-      moduleJSON: null,
-    };
-  }
-  handleChange(e, idx) {
+const Experience=()=>{
+ 
+
+   const [expModules,setExpModules] = useState(0);
+   const [currName,setName]= useState(null);
+   const [currPosition,setPosition]=useState(null);
+   const [currFromDate,setFrom] = useState(null);
+   const [currToDate,setTo] = useState(null);
+   const [currDescription,setDescription] =useState(null);
+   const [index,setIndex] = useState(0);
+   const [modules,setModules] = useState([]);
+   const [isAdding,setIsAdding] = useState(false);
+   
+  
+ const  handleChange= (e, idx) => {
     if (e.target.id === "company-name")
-      this.setState({ currName: e.target.value });
+      setName(e.target.value);
 
     if (e.target.id === "position")
-      this.setState({ currPosition: e.target.value });
+      setPosition(e.target.value);
 
     if (e.target.id === "date-from")
-      this.setState({ currFromDate: e.target.value });
+      setFrom( e.target.value );
 
     if (e.target.id === "date-to")
-      this.setState({ currToDate: e.target.value });
+      setTo( e.target.value);
 
     if (e.target.id === "job-description")
-      this.setState({ currDescription: e.target.value });
+      setDescription(e.target.value);
   }
-  appendModule(e) {
+ const appendModule=(e)=> {
+  console.log('hookstyle');
     e.preventDefault();
-    if (
-      this.state.currName &&
-      this.state.currDescription &&
-      this.state.currPosition
-    ) {
-      let thisModule = {
-        companyName: this.state.currName,
-        position: this.state.currPosition,
-        datefrom: this.state.currFromDate,
-        dateto: this.state.currToDate,
-        description: this.state.currDescription,
-        index: this.state.index,
+    if (currName &&currDescription &&currPosition) {
+      let newModule = {
+        companyName:currName,
+        position:currPosition,
+        datefrom:currFromDate,
+        dateto:currToDate,
+        description:currDescription,
+        index:index,
       };
-      this.setState({ index: this.state.index + 1, isAdding: false });
-      this.setState({
-        modules: this.state.modules.concat(thisModule),
-        moduleJSON: JSON.stringify(thisModule),
-      });
-      this.setState({
-        currName: null,
-        currPosition: null,
-        currFromDate: null,
-        currToDate: null,
-        currDescription: null,
-      });
+      setIndex(index+1);
+      setIsAdding(false);
+      setModules(modules.concat(newModule))
+      setName(null);
+      setPosition(null);
+      setFrom(null);
+      setTo(null);
+      setDescription(null);
+    
     }
-    this.setState({ isAdding: false });
+    setIsAdding(false);
 
   }
 
-  displayForm() {
+  const displayForm=()=> {
     return (
       <>
-        {this.state.isAdding ? (
+        {isAdding ? (
           <div className="modular-form-section">
             <>
               <div className="row">
@@ -80,7 +68,7 @@ class Experience extends Component {
                   <input
                     type="text"
                     id="company-name"
-                    onChange={this.handleChange}
+                    onChange={handleChange}
                     required
                   ></input>
                 </label>
@@ -90,8 +78,8 @@ class Experience extends Component {
                   <span>Position Title</span>
                   <input
                     type="text"
+                    onChange={handleChange}
                     id="position"
-                    onChange={this.handleChange}
                     required
                   ></input>
                 </label>
@@ -102,8 +90,8 @@ class Experience extends Component {
                   <span>Job Description</span>
                   <input
                     type="textarea"
+                    onChange={handleChange}
                     id="job-description"
-                    onChange={this.handleChange}
                     required
                   ></input>
                 </label>
@@ -114,8 +102,8 @@ class Experience extends Component {
                   <span>Start Date:</span>
                   <input
                     type="date"
+                    onChange={handleChange}
                     id="date-from"
-                    onChange={this.handleChange}
                     required
                   ></input>
                 </label>
@@ -124,12 +112,12 @@ class Experience extends Component {
                   <input
                     type="date"
                     id="date-to"
-                    onChange={this.handleChange}
+                    onChange={handleChange}
                   ></input>
                 </label>
               </div>
 
-              <button id="append-work-experience" onClick={this.appendModule}>
+              <button id="append-work-experience" onClick={appendModule}>
                 Save
               </button>
             </>
@@ -139,12 +127,12 @@ class Experience extends Component {
     );
   }
 
-  render() {
+ 
     return (
       <div className="expForm form-section">
         <h3 className="form-label">Work experience</h3>
-        {this.state.modules.length > 0
-          ? this.state.modules.map((item) => {
+        {modules.length > 0
+          ? modules.map((item) => {
               //Storing original value in hidden input using state.
               return (
                 <div className="module-container" key={item.index}>
@@ -185,11 +173,9 @@ class Experience extends Component {
                     className="delete-button"
                     onClick={(e) => {
                       e.preventDefault();
-                      this.setState({
-                        modules: this.state.modules.filter(
-                          (currItem) => currItem !== item
-                        ),
-                      });
+                     
+                      setModules(modules.filter((currItem) => currItem !== item));
+
                     }}
                   >
                     REMOVE
@@ -198,33 +184,28 @@ class Experience extends Component {
               );
             })
           : null}
-        {this.state.expModules > 0 ? (
-          this.displayForm(this.state.expModules)
-        ) : (
-          <></>
-        )}
+        {expModules > 0 ? (
+          displayForm(expModules)
+        ) :null}
         <>
-          {!this.state.isAdding ? (
-            <>
+          {!isAdding ? (
               <button
                 id="add-exp"
                 onClick={(e) => {
                   e.preventDefault();
-                  this.setState({
-                    expModules: this.state.expModules + 1,
-                    isAdding: true,
-                  });
+                  setExpModules(expModules+1);
+                  setIsAdding(true);
+                  
                 }}
               >
                 {" "}
                 + Add
               </button>
-            </>
           ) : null}
         </>
       </div>
     );
   }
-}
+
 
 export default Experience;

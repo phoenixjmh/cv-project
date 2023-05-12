@@ -16,19 +16,18 @@ const Education = () => {
   };
 
   const appendModule = (e) => {
-    console.log("hook-style");
     e.preventDefault();
+
     if (currName && currStudy && currStudyDate) {
+      let newModule = {
+        schoolName: currName,
+        study: currStudy,
+        dateStudied: currStudyDate,
+        index: index,
+      };
       setIndex(index + 1);
       setIsAdding(false);
-      setModules(
-        modules.concat({
-          schoolName: currName,
-          study: currStudy,
-          dateStudied: currStudyDate,
-          index: index,
-        })
-      );
+      setModules(modules.concat(newModule));
       setName(null);
       setStudy(null);
       setStudyDate(null);
@@ -122,9 +121,7 @@ const Education = () => {
                   className="delete-button"
                   onClick={(e) => {
                     e.preventDefault();
-                    setModules(
-                      modules.filter((currItem) => currItem !== item)
-                    );
+                    setModules(modules.filter((currItem) => currItem&&currItem !== item));
                   }}
                 >
                   REMOVE
@@ -133,20 +130,20 @@ const Education = () => {
             );
           })
         : null}
-      {eduModules > 0 ? displayForm(eduModules) :null}
+      {eduModules > 0 ? displayForm(eduModules) : null}
       <>
         {!isAdding ? (
-            <button
-              id="add-school"
-              onClick={(e) => {
-                e.preventDefault();
-                setEdu(eduModules + 1);
-                setIsAdding(true);
-              }}
-            >
-              {" "}
-              + Add
-            </button>
+          <button
+            id="add-school"
+            onClick={(e) => {
+              e.preventDefault();
+              setEdu(eduModules + 1);
+              setIsAdding(true);
+            }}
+          >
+            {" "}
+            + Add
+          </button>
         ) : null}
       </>
     </div>
